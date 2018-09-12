@@ -10,9 +10,13 @@ namespace UrlsAndRoutes.Controllers
             return View("Result", new Result { Controller = nameof(CustomerController), Action = nameof(Index) });
         }
 
-        public ViewResult List()
+        public ViewResult List(string id)
         {
-            return View("Result", new Result { Controller = nameof(CustomerController), Action = nameof(List) });
+            Result r = new Result { Controller = nameof(HomeController), Action = nameof(List) };
+            r.Data["Id"] = id ?? "<no value>";
+            r.Data["catchall"] = RouteData.Values["catchall"];
+
+            return View("Result", r);
         }
     }
 }
